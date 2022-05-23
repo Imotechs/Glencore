@@ -1,0 +1,38 @@
+{%extends 'users/userbase.html'%}
+{%load static%}
+{%block content%}
+<section class="page-content">
+        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    
+        <div class="thirds-row">
+        <script type="text/javascript">
+        new TradingView.widget({
+            "container_id": 'technical-analysis',
+            "width": 1040,
+            "height": 500,
+            "symbol": "BITSTAMP:BTCUSD",
+            "interval": "D",
+            "timezone": "exchange",
+            "theme": "White",
+            "style": "1",
+            "toolbar_bg": "#f1f3f6",
+            "withdateranges": true,
+            "hide_side_toolbar": false,
+            "allow_symbol_change": true,
+            "save_image": false,
+            "hideideas": true,
+            "studies": [ "ROC@tv-basicstudies",
+            "StochasticRSI@tv-basicstudies",
+            "MASimple@tv-basicstudies" ],
+            "show_popup_button": true,
+            "popup_width": "1000",
+            "popup_height": "650"
+        });
+        </script>
+        </div>
+            <footer class="page-footer">
+              
+            </footer>
+        </section>
+    
+{%endblock content%}

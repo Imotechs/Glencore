@@ -1,0 +1,28 @@
+{%extends 'mainapp/base.html'%}
+{%load static%}
+{%load crispy_forms_tags%}
+{%block content%}
+	<div class="d-flex align-items-center justify-content-center" style="padding: 30px;">
+        <div class="px-9 col-md-6" >
+            <h2 style="text-align: center; color: white;">Welcome Back</h2>
+            <p class="text-50" style="text-align: center; color: #f7921a">Sign in to continue</p>
+            <form class="mt-5 mb-4" action="#" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <h3>You are Loged Out!</h3>
+                    <small>Thank You for Using our Services</small>
+                </div>
+                {%csrf_token%}
+                
+                
+                <a class="btn" style="background-color:#f7921a; color:white;" href="{%url 'login'%}">SIGN IN AGAIN</a>
+                <!-- <div class="py-2">
+                    <button class="btn  btn-facebook btn-block"><i class="feather-facebook"></i> Connect with Facebook</button>
+                </div> -->
+            </form>
+     
+           
+        </div>
+    </div>
+	
+	
+	{%endblock content%}

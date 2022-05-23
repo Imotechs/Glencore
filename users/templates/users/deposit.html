@@ -1,0 +1,126 @@
+
+    {%extends 'users/userbase.html'%}
+    {%load static%}
+    {%block content%}
+
+    <section class="design-process-section" id="process-tab">
+        <div class="container">
+           <div class="row">
+              <div class="col-xs-12">
+                 <!-- design process steps-->
+                 <!-- Nav tabs -->
+                 <ul class="nav nav-tabs process-model more-icon-preocess" role="tablist">
+                    <li role="presentation" class="active"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+                       <p>Choose Deposit Option</p>
+                    </li>
+                    <li role="presentation"><a href="#"><i class="fa fa-send-o" aria-hidden="true"></i></a>
+                       <p>Input Amount</p>
+                    </li>
+                    <li role="presentation"><a href="#"><i class="fa fa-qrcode" aria-hidden="true"></i></a>
+                       <p>Confirm details</p>
+                    </li>
+                 </ul>
+                 <!-- end design process steps-->
+                 <!-- Tab panes -->
+                 <div class="tab-content" style="padding-left: 15%;" id="questions">
+                    <div role="tabpanel" class="tab-pane active" id="chooseoption">
+                       <div class="design-process-content">
+                          <h3 class="semi-bold">Choose Deposit Option</h3>
+                          <div class="form-group">
+          <form method="post">
+                                {%csrf_token%}
+                                <label>Choose Deposit Option</label>
+                                <select name="method" class="form-control">
+                                 <option value="null">...</option>
+                                 <option value="usdt">USDT</option>
+                                 <option value="btc">BTC</option>
+                                   <option value="etherum">Eth</option>
+                                </select>
+                          </div>
+                          <div class="mt-5 text-center"><a onclick="next()" class="btn btn-warning profile-button"
+                                >Proceed</a></div>
+                       </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="amount">
+                       <div class="design-process-content">
+                          <h3 class="semi-bold">Input Amount</h3>
+                          <div class="form-group">
+                             <label>Amount</label>
+                             <input type="number" class="form-control" name="amount" id="input">
+                          </div>
+                          <div class="mt-5 text-center"><button onclick="return(validate(), next())" class="btn btn-warning profile-button"
+                                type="button">Proceed</button></div>
+                       </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="confirm">
+                       <div class="design-process-content">
+                          <h3 class="semi-bold">COPY Payment Wallet Adress and Confirm</h3>
+                          <p style="font-size:18px;">Your trade account will be credited once your payment is fully confirmed. 
+                           <br><small style="color:rgb(245, 19, 3);"> Try to pay within 3 working days after submiting this form Else Deposit will be Canceled</p>
+                           </small>
+                          <div style="font-size:18px;"> <strong id ="copy">xadwqweewtrlwrtretewqrtert</strong>
+                          &nbsp;<button type="button" onclick='copyEvent("copy")' class="btn btn-outline-info">Copy</button>
+                        </div>
+                          <div class="mt-5 text-center"><button class="btn btn-outline-success profile-button"
+                                type="submit"> Copy?, Proceed & submit</button></div>
+                       </div>
+         </form>
+
+                    </div>
+
+                 </div>
+              </div>
+           </div>
+        </div>
+        </div>
+     </section>
+    
+    
+     <script type="text/javascript">
+        var showing = [1, 0, 0];
+        var questions = ['chooseoption', 'amount', 'confirm'];
+        function next() {
+           var qElems = [];
+           for (var i = 0; i < questions.length; i++) {
+              qElems.push(document.getElementById(questions[i]));
+           }
+           for (var i = 0; i < showing.length; i++) {
+              if (showing[i] == 1) {
+                 qElems[i].style.display = 'none';
+                 showing[i] = 0;
+                 if (i == showing.length - 1) {
+                    qElems[0].style.display = 'block';
+                    showing[0] = 1;
+                 } else {
+                    qElems[i + 1].style.display = 'block';
+                    showing[i + 1] = 1;
+                 }
+                 break;
+              }
+           }
+        }
+
+        function validate(e){
+           if(document.getElementById('input').value==''){
+              alert('Please enter an amount!!');
+              document.getElementById('input').style.borderColor="red";
+              document.getElementById('input').style.backgroundColor="yellow";
+              document.getElementById('input').style.borderWidth="2";
+              e.stopPropagation();
+              e.preventDefault();
+              return false;
+           }
+           
+        }
+        function copyEvent(id) {
+           var str = document.getElementById(id);
+           window.getSelection().selectAllChildren(str);
+           document.execCommand("Copy")
+        }
+     </script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {%endblock content%}

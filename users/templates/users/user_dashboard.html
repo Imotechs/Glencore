@@ -1,0 +1,139 @@
+{%extends 'users/userbase.html'%}
+{%load static%}
+{%block content%}
+        <!-- Start Page Content -->
+        <div class="row">
+          <div class="col-12 p-2 color-success">
+            <div class="card">
+              <div class="card-body"> Hello {{request.user.username}}, Welcome to Glencore|Trading </div>
+            </div>
+          </div>
+        </div>
+        <!-- End PAge Content -->
+      </div>
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-lg-3 mb-3">
+            <div class="deposit status">
+              <h5>Total Deposit</h5>
+              {%if deposit.sum%}
+              <h2>$ <span id="current-deposit">{{deposit.sum}}</span></h2>
+              {%else%}
+              <h2>$ <span id="current-deposit">0.00</span></h2>
+              {%endif%}
+            </div>
+          </div>
+
+          <div class="col-lg-3 mb-3">
+            <div class="withdraw status">
+              <h5>Withdraw</h5>
+              {%if withdrow.sum%}
+              <h2>$ <span id="current-deposit">{{withdrow.sum}}</span></h2>
+              {%else%}
+              <h2>$ <span id="current-deposit">0.00</span></h2>
+              {%endif%}            </div>
+          </div>
+
+          <div class="col-lg-3 mb-3">
+            <div class="balance status">
+              <h5>Balance</h5>
+              {%if account.balance%}
+              <h2>$ <span id="current-deposit">{{account.balance}}</span></h2>
+              {%else%}
+              <h2>$ <span id="current-deposit">00.0</span></h2>
+              {%endif%}
+            </div>
+          </div>
+
+          <div class="col-lg-3 mb-3">
+            <div class="account status">
+              <h5>Account ID:</h5>
+              <h2><span id="current-balance">{{profile.uid}}</span></h2>
+            </div>
+          </div>
+        </div> 
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="submit-area">
+              <h4>Deposit</h4>
+              <input id="deposit-amount" type="text" class="form-control" placeholder="Click the button below" readonly><br>
+              <a id="deposit-btn" class="btn btn-success" href="{%url 'deposit'%}"
+                  style="text-decoration: none; color: #eee; font-weight: bold;">Deposit</a> </button>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="submit-area">
+              <h4>Withdraw</h4>
+              <input id="withdraw-amount" type="text" class="form-control" placeholder="Click the button below" readonly><br>
+              <a id="deposit-btn" class="btn btn-success" href="{%url 'withdrow'%}"
+                  style="text-decoration: none; color: #eee; font-weight: bold;">Withdraw</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div
+      style="height:560px; background-color: #1D2330; overflow:hidden; box-sizing: border-box; border: 1px solid #282E3B; border-radius: 4px; text-align: right; line-height:14px; font-size: 12px; font-feature-settings: normal; text-size-adjust: 100%; box-shadow: inset 0 -20px 0 0 #262B38;padding:1px;padding: 0px; margin: 0px; width: 100%;">
+      <div style="height:540px; padding:0px; margin:0px; width: 100%;"><iframe
+          src="https://widget.coinlib.io/widget?type=chart&theme=dark&coin_id=859&pref_coin_id=1505" width="100%"
+          height="536px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" border="0"
+          style="border:0;margin:0;padding:0;line-height:14px;"></iframe></div>
+      <div
+        style="color: #626B7F; line-height: 14px; font-weight: 400; font-size: 11px; box-sizing: border-box; padding: 2px 6px; width: 100%; font-family: Verdana, Tahoma, Arial, sans-serif;">
+        <a href="https://coinlib.io" target="_blank"
+          style="font-weight: 500; color: #626B7F; text-decoration:none; font-size:11px">Cryptocurrency
+          Prices</a>&nbsp;by Coinlib
+      </div>
+    </div>
+    <hr>
+
+    <div
+      style="height:433px; background-color: #FFFFFF; overflow:hidden; box-sizing: border-box; border: 1px solid #56667F; border-radius: 4px; text-align: right; line-height:14px; font-size: 12px; font-feature-settings: normal; text-size-adjust: 100%; box-shadow: inset 0 -20px 0 0 #56667F; padding: 0px; margin: 0px; width: 100%;">
+      <div style="height:413px; padding:0px; margin:0px; width: 100%;"><iframe
+          src="https://widget.coinlib.io/widget?type=full_v2&theme=light&cnt=6&pref_coin_id=1505&graph=yes" width="100%"
+          height="409px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" border="0"
+          style="border:0;margin:0;padding:0;"></iframe></div>
+      <div
+        style="color: #FFFFFF; line-height: 14px; font-weight: 400; font-size: 11px; box-sizing: border-box; padding: 2px 6px; width: 100%; font-family: Verdana, Tahoma, Arial, sans-serif;">
+        <a href="https://coinlib.io" target="_blank"
+          style="font-weight: 500; color: #FFFFFF; text-decoration:none; font-size:11px">Cryptocurrency
+          Prices</a>&nbsp;by Coinlib</div>
+    </div>
+
+    <section class="page-content">
+      <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  
+      <div class="thirds-row">
+      <script type="text/javascript">
+      new TradingView.widget({
+          "container_id": 'technical-analysis',
+          "width": 1040,
+          "height": 500,
+          "symbol": "BITSTAMP:BTCUSD",
+          "interval": "D",
+          "timezone": "exchange",
+          "theme": "White",
+          "style": "1",
+          "toolbar_bg": "#f1f3f6",
+          "withdateranges": true,
+          "hide_side_toolbar": false,
+          "allow_symbol_change": true,
+          "save_image": false,
+          "hideideas": true,
+          "studies": [ "ROC@tv-basicstudies",
+          "StochasticRSI@tv-basicstudies",
+          "MASimple@tv-basicstudies" ],
+          "show_popup_button": true,
+          "popup_width": "1000",
+          "popup_height": "650"
+      });
+      </script>
+      </div>
+          <footer class="page-footer">
+            
+          </footer>
+      </section>
+{%endblock content%}

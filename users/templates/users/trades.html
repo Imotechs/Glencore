@@ -1,0 +1,106 @@
+{%extends 'users/userbase.html'%}
+{%load static%}
+{% load crispy_forms_tags%}
+{%block content%}
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="submit-area">
+              <h4>Start a Trade</h4>
+              <form method="post" enctype="multipart/form-data">
+                  {%csrf_token%}
+                  {{form|crispy}}
+                  <p></p>
+                <div id="deposit-amount"  ></div>
+              <button id="deposit-btn" class="btn btn-success" type="submit">Trade</button>
+            </div>
+          </form>
+          </div>
+          <style>
+            form label{
+                color: rgb(212, 205, 205)
+            }
+
+            form input{
+                width:100%;
+            }
+        </style>
+        {%if trade%}
+          <div class="col-lg-6">
+            <div class="submit-area">
+              <h4>Overview of Running Trade</h4>
+              <p>Trade Amount :  $ {{trade.amount}} </p>
+              <p>Percentage Profit : 0.8% </p>
+              <p>Profit : $ {{trade.sum}}</p>
+              <hr/>
+              <div class="bg-success" style="text-align: center;">
+                <h6 id = 'time'>{{trade.due_time|date:'M d,Y H:m:s'}}</h6>
+              </div>
+              <div class="bg-white" style="text-align: center;">
+                <h5 style="color:black" id = 'count'>Hi</h5>
+              </div>
+            </div>
+          </div>
+          {%else%}
+          <div class="col-lg-6">
+            <div class="submit-area">
+              <h4>How to Trade</h4>
+              <p>Initiate a Trade with more than 50 USDT<br>
+                 that runs for some time  and returns Profit accordingly</p>
+              <p></p>
+              <p></p>
+              <hr/>
+            
+             
+            </div>
+          </div>
+          {%endif%}
+        </div>
+      </div>
+      <hr>
+      <h3>PENDING TRADE(S)</h3>
+      {%if others%}
+      <table class="others">
+        <th>Amount</th>
+        <th>Date invested</th>
+        <th>Due Date</th>
+        {%for trade in others%}
+        <tr>
+          <td >{{trade.amount}}</td>
+          <td class="td">{{trade.time_now|date:'M d,Y H:m:s'}}</td>
+          <td>{{trade.due_time|date:'M d,Y H:m:s'}}</td>
+        </tr>
+        {%endfor%}
+      </table>
+      {%endif%}
+      <style>
+        .others{
+          padding: 5px;
+          width: 100%;
+          background-color: black;
+          color:aliceblue
+        }
+      .others th{
+        padding: 20px;
+      }
+      .td{
+        padding: 15px;
+        margin: 10px;
+        padding: 10px;
+      }
+      .others tr{
+        margin: 10px;
+        padding: 10px;
+      }
+      </style>
+        <footer class="page-footer">
+          <p>Glencore|Trading</p>
+        </footer>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="{%static 'users/count.js'%}"></script>
+
+    {%endblock content%}

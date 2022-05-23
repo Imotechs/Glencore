@@ -1,0 +1,97 @@
+{%extends 'mainapp/base.html'%}
+{%load static%}
+{%block content%}
+	<!-- START PAGE BANNER AND BREADCRUMBS -->
+	<section id="page-banner">
+		<div class="single-page-title-area overlay" data-background="assets/img/bg/slide1.jpg">
+			<div class="auto-container">
+				<div class="row">
+					<div class="col-12 text-center">
+						<div class="single-page-title">
+							<h2>Get In Touch</h2>
+							<p>Have an Issue? Reach out to us</p>
+						</div>
+					</div>
+				</div>
+				<!-- end row-->
+			</div>
+		</div>
+		<div class="single-page-title-area-bottom">
+			<div class="auto-container">
+				<div class="row">
+					<div class="col-12 text-center">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">Contact Us</li>
+						</ol>
+					</div>
+				</div>
+				<!-- end row-->
+			</div>
+		</div>
+	</section>
+	<!-- END PAGE BANNER AND BREADCRUMBS -->
+	
+	<!-- START CONTACT SECTION -->
+    <section id="contactpage" class="section-padding">
+        <div class="container">
+			<div class="row">
+				<div class="col-12 text-center">
+					<div class="section-title">
+						<h5>Response within minute</h5>
+						<h3>Contact <span>Glencore|Trading</span></h3>
+					</div>
+				</div>
+			</div>
+			<!-- end section title -->
+
+			<div class="row">
+				<div class="col-lg-7 mx-auto">
+					<div class="contact-form-wrapper">
+						<div class="contact-form">
+							<form id="contact-form" class="form" method="post" enctype="multipart/form-data">
+								<div class="row">
+									<div class="form-group col-12 mb-3">
+										<label>Full Name:</label>
+										<input name="name" class="form-control" id="cname" required="required" type="text">
+									</div>
+									<div class="form-group col-12 mb-3">
+										<label>Your Email:</label>
+										<input name="email" class="form-control" id="cemail" required="required" type="email">
+									</div>
+									{%csrf_token%}
+									<div class="form-group col-12 mb-3">
+										<label>Subject:</label>
+										<input name="subject" class="form-control" id="csubject" required="required" type="text">
+									</div>
+									<div class="form-group col-12 mb-3">
+										<label>Message:</label>
+										<textarea rows="6" name="message" class="form-control" id="cmessage" placeholder="Your Message Here..." required="required"></textarea>
+									</div>
+									<div class="form-group col-lg-12 mb-0 text-center">
+										<div class="actions">
+											<button value="Submit Message" name="submit" id="submitButton" class="btn btn-contact-bg" title="Click here to submit your message!" type="submit">Submit Message</button>
+											<img src="{%static 'mainapp/assets/img/ajax-loader.gif'%}" id="loader" style="display:none" alt="loading" width="16" height="16">
+										</div>
+									</div>
+								</div>
+							</form>								
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end row -->
+        </div>
+        <!--- END CONTAINER -->
+    </section>
+    <!-- END CONTACT SECTION -->
+	
+	<!-- GOOGLE MAP -->
+	<div class="gmap_canvas">
+		<iframe id="gmap_canvas" src="https://maps.google.com/maps?q=Bardstown%20Road%2C%20Louisville&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"></iframe>
+	</div>
+	<!-- END GOOGLE MAP -->
+	{%endblock content%}
+
+    <!-- START FOOTER -->
+  

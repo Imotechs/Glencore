@@ -1,0 +1,47 @@
+{%extends 'mainapp/base.html'%}
+{%load static%}
+{%load crispy_forms_tags%}
+{%block content%}
+	<div class="d-flex align-items-center justify-content-center" style="padding: 30px;">
+        <div class="px-9 col-md-6" >
+            <h2 style="text-align: center; color: white;">Join Glencore|Trading</h2>
+            <p class="text-50" style="text-align: center; color: #f7921a">Sign up to Continue</p>
+            
+            <form class="mt-5 mb-4"  method="post" enctype = "multipart/form-data">
+                {%if msg%}
+                <p style="color:red;">{{msg}}</p>
+            {%endif%}
+            
+                {%csrf_token%}
+                <fieldset>
+                    <legend></legend>
+                <div class="form-group">
+                {{form|crispy}}
+            </div>
+        </fieldset>
+                <style>
+                    form label{
+                        color: rgb(212, 205, 205)
+                    }
+
+                    form p{
+                        color: red;
+                    }
+
+                    form input{
+                        width:100%;
+                    }
+                </style>
+        
+               <hr/>
+                <button class="btn" style="background-color:#f7921a; color:white;" type="submit">Register</button>
+      
+            </form>
+            <div class="d-flex align-items-center justify-content-center">
+                <p class="text-center m-0" style="color: #f7921a;">Already have an account? <a href="{%url 'login'%}" style="color:rgb(212, 205, 205);">Sign in</a> </p>
+            </div>
+        </div>
+    </div>
+
+	{%endblock content%}
+

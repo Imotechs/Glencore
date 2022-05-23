@@ -1,0 +1,38 @@
+{%extends 'mainapp/base.html'%}
+{%load static%}
+{%block content%}
+	<div class="d-flex align-items-center justify-content-center" style="padding: 30px;">
+        <div class="px-9 col-md-6" >
+            <h2 style="text-align: center; color: white;">Welcome Back</h2>
+            <p class="text-50" style="text-align: center; color: #f7921a">Sign in to continue</p>
+            <form class="mt-5 mb-4"  method="post" enctype="multipart/form-data">
+                {%if msg%}
+                <p style="color:red;">{{msg}}</p>
+            {%endif%}
+            
+                <div class="form-group">
+                    <label for="email1" style="color: rgb(212, 205, 205);">Email or Username</label>
+                    <input type="email/text" name="username" placeholder="Enter Email or Username" class="form-control" id="emailusername" aria-describedby="emailHelp" >
+                </div>
+                {%csrf_token%}
+                <div class="form-group">
+                    <label for="inputpassword" style="color: rgb(212, 205, 205);">Password</label>
+                    <input type="password" name = 'password' placeholder="Enter Password" class="form-control" id="passworinput">
+                </div>
+              
+                <button class="btn" style="background-color:#f7921a; color:white;" type="submit">SIGN IN</button>
+                <!-- <div class="py-2">
+                    <button class="btn  btn-facebook btn-block"><i class="feather-facebook"></i> Connect with Facebook</button>
+                </div> -->
+            </form>
+            <a href="{%url 'password_reset'%}" class="text-decoration-none">
+                <p class="text-center" style="color: rgb(212, 205, 205);">Forgot your <c style="color:#f7921a">password?</c></p>
+            </a>
+            <div class="d-flex align-items-center justify-content-center">
+                <p class="text-center m-0" style="color: #f7921a;">Don't have an account? <a href="{%url 'register'%}" style="color:rgb(212, 205, 205);">Sign up</a> </p>
+            </div>
+        </div>
+    </div>
+	
+	
+	{%endblock content%}
