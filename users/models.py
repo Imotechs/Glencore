@@ -52,7 +52,7 @@ class PinDeposit(models.Model):
     
 class Deposit(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    amount = models.FloatField()
+    amount = models.FloatField(default=0)
     option = models.CharField(max_length=15, blank=True)
     date_deposited = models.DateTimeField(blank=True, null=True)
     date_approved = models.DateTimeField(blank=True, null=True)
@@ -64,7 +64,7 @@ class Deposit(models.Model):
 
 class Withdrowal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    amount = models.FloatField( verbose_name='USD')
+    amount = models.FloatField(default=0, verbose_name='USD')
     wallet_address = models.CharField(max_length=60, blank=True)
     date_placed = models.DateTimeField(blank=True)
     date_approved = models.DateTimeField(blank=True, null=True)

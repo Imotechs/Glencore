@@ -3,9 +3,9 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Trading(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    amount = models.FloatField(verbose_name=('USDT'))
-    profit = models.FloatField()
-    sum =  models.FloatField()
+    amount = models.FloatField(default=0,verbose_name=('USDT'))
+    profit = models.FloatField(default=0)
+    sum =  models.FloatField(default=0)
     time_now = models.DateTimeField()
     due_time = models.DateTimeField()
     profited = models.BooleanField(default=False)
@@ -13,8 +13,8 @@ class Trading(models.Model):
         return f'{self.user}'
 
 class RandUser(models.Model):
-    count = models.IntegerField()
-    views = models.IntegerField(null=True, blank=True)
+    count = models.IntegerField(default=0)
+    views = models.IntegerField(default=0,null=True, blank=True)
 
 class UserPayEvidence(models.Model):
     user =models.ForeignKey(User,on_delete=models.CASCADE)
