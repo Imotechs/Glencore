@@ -1,7 +1,11 @@
 from django.urls import path
 from .views import (login,register, 
 pre_profile,deposit,settings,user_profile,
-my_transactions,trading, MakeInvestment,WithDraw
+my_transactions,trading, 
+MakeInvestment,WithDraw,
+all,tradedetaileth,trades,
+tradedetailbtc,tradedetailcom,tradedetaileth,tradedetailforex,
+tradesforex,tradesbtc,tradescom,tradesucces,tradehistory
 )
 urlpatterns = [
     path('accounts/login/', login, name = 'login'),
@@ -14,4 +18,15 @@ urlpatterns = [
     path('my/account/transaction/', my_transactions, name = 'mytransactions'),
     path('post_registrations/<int:pk>/', pre_profile, name = 'pre_profile'),
     path('withdrow/income/', WithDraw.as_view(), name = 'withdrow'),
+    path('all_custom-trades/',all ,name="alltrades"),
+    path('trade-details/eth/', tradedetaileth, name = 'tradedetail'),
+    path('trade-details/btc/', tradedetailbtc, name = 'tradedetailbtc'),
+    path('trade-details/com/', tradedetailcom, name = 'tradedetailcom'),
+    path('trade-details/forex/', tradedetailforex, name = 'tradedetailforex'),
+    path('eth/trades/',trades,name="onetrade"),
+    path('btc/trades/',tradesbtc,name="tradebtc"),
+    path('com/trades/',tradescom,name="tradecom"),
+    path('forex/trades/',tradesforex,name="tradeforex"),
+    path('success/',tradesucces, name= 'tradesucces'),
+    path('trade/histroy/', tradehistory, name = 'tradehistory'),
 ]

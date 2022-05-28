@@ -64,12 +64,24 @@
           </div>
 
           <div class="col-lg-6">
-            <div class="submit-area">
-              <h4>Withdraw</h4>
-              <input id="withdraw-amount" type="text" class="form-control" placeholder="Click the button below" readonly><br>
-              <a id="deposit-btn" class="btn btn-success" href="{%url 'withdrow'%}"
-                  style="text-decoration: none; color: #eee; font-weight: bold;">Withdraw</a>
-            </div>
+            
+              
+              {%if profile.referred%}
+              <!-- <h4>My Referrer</h4>
+              <input id="withdraw-amount" type="text"readonly class="form-control" placeholder="{{profile.referrer}}" ><br> -->
+
+                  {%else%}
+                  <div class="submit-area">
+                <h4> Add a Referrer</h4>
+              <form  method="post">
+                {%csrf_token%}
+              <input id="withdraw-amount" type="text" name = 'uid' class="form-control" placeholder="add a Referrer ID here" ><br>
+              <button  class="btn btn-success"type = "submit"
+                style="text-decoration: none; color: #eee; font-weight: bold;">Submit</button>
+              </form>
+              {%endif%}
+
+              </div>
           </div>
         </div>
       </div>

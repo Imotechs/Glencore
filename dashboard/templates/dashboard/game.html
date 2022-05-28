@@ -16,9 +16,10 @@
 </head>
 
  <!-- Messages -->
-                        
+   <body>                    
             <!-- End Bread crumb -->
-            
+            <div class="container">
+      
             <!-- Container fluid  -->
             {% if messages %}
 
@@ -29,7 +30,6 @@
             {%endfor%}
       {% endif %}
             <!-- Container fluid  -->
-            <div class="container-fluid">
                 <!-- Start Page Content -->
                 <div class="row">
                     <div class="col-12">
@@ -37,12 +37,11 @@
                     </div>
                 </div>
                 <!-- Start Page Content -->
-                <div class="container-fluid">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-title">
                                 <h4>Glencore|trading Game Time  &nbsp; &nbsp; &nbsp; <a href="{%url 'profile'%}">Quit Game</a></h4></div>
-                                <h3 style="float:right ;">Account Bal &nbsp; ${{account.balance}}
+                                <h3 style="float:right ;">Account Balance: &nbsp; {{account.balance}} USD
                                     {%if msg%}
                                     <p class="btn btn-sm round btn-outline-success">{{msg}}</p>
                                     {%endif%}
@@ -50,37 +49,45 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-de mb-0">
-                                            Reward &nbsp;<button class="btn btn-sm round btn-outline-success"  >  ${{amount}}</button>
+                                        <form  method="post">
+
+                                        Stake a Game: <input required="required" type="number" class="btn-outline-success" name="amount" >
                                         <thead>
                                             <tr>
-                                                <th>Game </th>
+                                                <th>Game [Choose a lucky number] </th>
                                                
-                                                
+                        
                                             </tr>
 
                                         </thead>
                                         
                                         <tbody>
                                             <tr>
+                                                    <input hidden name="rnumbers" value="{{numbers}}"> 
                                                 {%for num in numbers%}
                                                 <td>
-                                                    <form  method="post">
                                                         {%csrf_token%}
-                                                    <input hidden name="amount" value="{{amount}}">
                                                     <button type = "submit"class="btn btn-sm round btn-outline-danger" name="choice" value="{{num}}"> {{num}}</button>
-                                                </form>
                                                 </td>
                                                 {%endfor%}
+                                            </form>
+
                                                
-                                                </form>
-                                            </tr>
+                                            <style>
+                                                button{
+                                                    width: 70px;
+                                                }
+                                                input{
+                                                    width: 70px;
+                                                }
+                                                </style>                                            </tr>
                                             <h3>Instructions</h3>
                                            <p>
-                                               With every game, there is a reward attached,<br>
+                                               With every game, you stake the amount you wish to use and play,<br>
                                                Choose a number which you think will correspond to our Robots's chosen number<br>
-                                                if you can predict our Robot, you go with the reward.
-                                                <br>Else Our Robot Go with the reward.
-                                                <br>Your Balnce is updated automatically. GoodLuck!
+                                                if you can predict our Robot, we pay you double of what you stake.
+                                                <br>Else you lose what you stake for the game.
+                                                <br>Your Balance is updated automatically. GoodLuck!!!
                                            </p>
                                         </tbody>
                                     </table>
@@ -88,15 +95,7 @@
                             </div>
                         </div>
                 </div>              
-            <!-- End PAge Content -->
-                <!-- End PAge Content -->
-            <!-- End Container fluid  -->
-            <!-- footer -->
-            <footer class="footer"> © 2022 Glencore All Right Reserved.</footer>
-            <!-- End footer -->
-        <!-- End Page wrapper  -->
-    <!-- End Wrapper -->
-    <!-- All Jquery -->
+           
     <script src="{%static 'dashboard/js/lib/jquery/jquery.min.js'%}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{%static 'dashboard/js/lib/bootstrap/js/popper.min.js'%}"></script>

@@ -3,14 +3,14 @@ import random
 
 def get_date():
     now = datetime.datetime.now()
-    nday = datetime.timedelta(days = 1)
+    nday = datetime.timedelta(days = 21)
     due_time = now + nday
     print(due_time)
     return now, due_time
 
 
 def get_percentage(amount):
-    percentage = 0.008
+    percentage = 0.008 *21
     try:
         interest = int(amount)*percentage
         return interest
@@ -46,5 +46,13 @@ def get_user_id():
     return f'{num2}{num1}'
 
 def get_rand_user():
-    num = [5,6,7,20,32,30,1,2,3,]
+    num = [250,600,700,200,320,300,710,201,312,]
     return random.choice(num)
+
+def get_referrer_percentage(amount):
+    percentage = 0.05
+    try:
+        interest = int(amount)*percentage
+        return interest
+    except Exception as er:
+        return er

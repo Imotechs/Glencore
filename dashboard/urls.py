@@ -1,6 +1,10 @@
 from django.urls import path
 from django.views import View
-from .views import Dashboard, ActiveTrades,SuccessfulTrades,AllUsers,AllDeposit,AllWithdraws,MakeMail,Emails,ViewEmails
+from .views import (Dashboard, ActiveTrades,
+SuccessfulTrades,AllUsers,AllDeposit,AllWithdraws,
+MakeMail,Emails,ViewEmails,AdminUploadView
+
+)
 urlpatterns = [
     path('main/', Dashboard.as_view(), name='dashboard'),
     # path('staffs/', Staffs.as_view(), name = 'staffs'),   
@@ -12,6 +16,7 @@ urlpatterns = [
     path('view/<int:pk>/mails/', ViewEmails.as_view(), name = 'readmail'),
     path('view/active/trades/', ActiveTrades.as_view(), name = 'activetrades'),
     path('view/succesfull/trades/', SuccessfulTrades.as_view(), name = 'successfultrades'),
+    path('uploads/views/', AdminUploadView.as_view(), name = 'evidenceview')
     # path('get/pin/', Pin.as_view(), name = 'pin'),
     # path('pin/detail/<int:pk>/', PinDetail.as_view(), name = 'pindetails'),
     # path('pin/payments/', PintPayments.as_view(), name = 'pinpayments'),

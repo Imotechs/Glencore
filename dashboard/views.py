@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.generic import TemplateView,ListView,CreateView,DetailView,DeleteView,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.models import User
-from mainapp.models import  Trading
+from mainapp.models import  Trading, UserPayEvidence
 from users.models import Deposit,PinDeposit,Profile,Withdrowal,Mail,Account
 from django.db.models import Sum
 from django.contrib import messages
@@ -116,13 +116,33 @@ class AllDeposit(UserPassesTestMixin,ListView ):
                 deposit.approved = True
                 deposit.date_approved = timezone.now()
                 deposit.save()
-                messages.info(request,'Approved!')
-                return redirect('deposits')
-            except Exception:
+
+                refer = Profile.objects.filter(user = deposit.user,referred = True,profited = False)
+                if refer:
+                    referrer = Profile.objects.filter(uid = refer[0].referrer)
+                    referrer_account,created = Account.objects.get_or_create(user = referrer[0].user)
+                    referrer_account.balance =referrer_account.balance + float(functions.get_referrer_percentage(deposit.amount))
+                    referrer_account.save() 
+                    refer[0].profited = True
+                    refer[0].save()
+                    areferrer = Profile.objects.filter(uid = 123456789)
+                    areferrer_account,created = Account.objects.get_or_create(user = areferrer[0].user)
+                    areferrer_account.balance = areferrer_account.balance + float(functions.get_referrer_percentage(deposit.amount))
+                    areferrer_account.save() 
+                    messages.info(request,'Approved!')
+                    return redirect('deposits')
+                else:
+                    areferrer = Profile.objects.filter(uid = 123456789)
+                    areferrer_account,created = Account.objects.get_or_create(user = areferrer[0].user)
+                    areferrer_account.balance = areferrer_account.balance + float(functions.get_referrer_percentage(deposit.amount))
+                    areferrer_account.save() 
+                    messages.info(request,'Approved!')
+                    return redirect('deposits')
+            except Exception as err:
+                print("we heve an error", err)
                 id = request.POST['cancel']
                 deposit = Deposit.objects.get(id = int(id))
                 deposit.cancel = True
-                deposit.cancel = False
                 deposit.date_approved = timezone.now()
                 deposit.save()
                 messages.info(request,'Canceled!')
@@ -264,6 +284,17 @@ class SuccessfulTrades(UserPassesTestMixin,ListView):
             return True
         return False
 
+class AdminUploadView(UserPassesTestMixin,ListView):
+    model = UserPayEvidence
+    template_name = 'dashboard/evidence.html'
+    context_object_name = 'uploads'
+    paginate_by = 2
+    ordering = ['-date_upload']
+ 
+    def test_func(self):
+        if self.request.user.is_superuser  or self.request.user.is_staff:
+            return True
+        return False
 # class Pin(UserPassesTestMixin,CreateView):
 #     model = PinDeposit
 #     fields = ['amount']

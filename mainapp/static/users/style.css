@@ -343,8 +343,8 @@ body {
 
   .page-header .admin-menu {
     position: absolute;
-    left: 98px;
-    top: 57px;
+    left: 0px;
+    top: 37px;
     margin-top: 0;
     z-index: 2;
     border-radius: var(--border-radius);
@@ -751,18 +751,22 @@ body {
 
 .deposit {
 	background-color: slateblue;
+  word-wrap: break-word;
 }
 
 .withdraw {
 	background-color: lightsalmon;
+  word-wrap: break-word;
 }
 
 .account {
 	background-color: orange;
+  word-wrap:break-word;
 }
 
 .balance {
 	background-color: tomato;
+  word-wrap:break-word;
 }
 
 .status {

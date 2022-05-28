@@ -120,12 +120,20 @@
             </svg>
           </a>
             -->
+      <div class="d-flex justify-content-between">
+        <div><button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
+          <img src="{%static 'mainapp/assets/img/menu1.png'%}" alt="menu toggler" width="25" height="20">
+        </button></div>
 
-      <button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
-        <svg width="20" height="20" aria-hidden="true">
-          <use xlink:href="#down"></use>
-        </svg>
-      </button>
+        <a href="{%url 'myprofile'%}">
+          <div><button class="person float-right" aria-expanded="false" aria-label="open menu" style="color: white;">
+          <svg width="30" height="35" aria-hidden="true">
+            <use xlink:href="#users"></use>
+          </svg>
+          </button></div>
+        </a>
+      </div>
+      
       <ul class="admin-menu">
         <li class="menu-heading">
           <h3>Main</h3>
@@ -162,7 +170,7 @@
           </a>
         </li>
         <li>
-          <a href="{%url 'trade'%}">
+          <a href="{%url 'alltrades'%}">
             <svg>
               <use xlink:href="#trends"></use>
             </svg>
@@ -170,6 +178,13 @@
           </a>
         </li>
         <li>
+            <a href="{%url 'tradehistory'%}">
+              <span style="color: #eee;">Trade History</span>
+
+            </a>
+          </li>
+          
+          <li>
           <a href="{%url 'games'%}">
             <svg>
               <use xlink:href="#collection"></use>
@@ -177,6 +192,7 @@
             <span style="color: #eee;">Lottery</span>
           </a>
         </li>
+        
         <li>
           <a href="{%url 'withdrow'%}">
             <svg>
@@ -191,6 +207,12 @@
               <use xlink:href="#appearance"></use>
             </svg>
             <span style="color: #eee;">Account Deposit</span>
+          </a>
+        </li>
+        <li>
+          <a href="{%url 'evidence'%}">
+            
+            <span style="color: #eee;">Upload Payment Evidence</span>
           </a>
         </li>
         <li class="menu-heading">

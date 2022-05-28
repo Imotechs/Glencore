@@ -55,12 +55,12 @@
 								<li><a href="{%url 'logout'%}"><i class="icofont icofont-user-alt-5"></i> Sign Out </a></li>
 
 								<li><a href="{%url 'profile'%}"><i class="icofont icofont-login"></i> My Profile </a></li>
-								<li><a href="tel:+2347062698896"><i class="icofont icofont-live-support"></i> Support </a></li>
+								<li><a href="{%url 'contact'%}"><i class="icofont icofont-live-support"></i> Support </a></li>
 								
 								{%else%}	
 								<li><a href="{%url 'login'%}"><i class="icofont icofont-login"></i> Sign In </a></li>
 								<li><a href="{%url 'register'%}"><i class="icofont icofont-user-alt-5"></i> Register </a></li>
-								<li><a href="tel:+2347062698896"><i class="icofont icofont-live-support"></i> Support </a></li>
+								<li><a href="{%url 'contact'%}"><i class="icofont icofont-live-support"></i> Support </a></li>
 								{%endif%}
 							</ul>
 						</div>
@@ -111,7 +111,7 @@
 									<li class="dropdown"><a href="" class="nav-link">Services</a>
 										<ul class="dropdown-menu">
 											<li><a href="{%url 'trade'%}">Trade</a></li>
-											<li><a href="#">Games</a></li>
+											<li><a href="{%url 'games'%}">Games</a></li>
 											<li><a href="{%url 'trading'%}">Cryptocurrency Charts</a></li>
 											
 										</ul>
@@ -220,20 +220,35 @@
                         </div>
                         <!-- END SECTION TITLE -->
 						<div class="col-12 footer-widget-inner recentPost">
-							<div class="singleRecpost">
+								{%if alluser%}
+								<div class="singleRecpost">
+
 								<h1 style="color: orange;">{{alluser.count}}</h1>
 								<small>Registered</small>
 							</div>
-							<div class="singleRecpost">
+
+								{%endif%}
+
+
+								{%if tradeuser%}
+								<div class="singleRecpost">
+
 								<h1 style="color: orange;">{{tradeuser}}</h1>
 								<small>Traders</small>
-
 							</div>
-							<div class="singleRecpost">
+
+								{%endif%}
+
+
+								{%if all_views%}
+								<div class="singleRecpost">
+
 								<h1 style="color: orange;">{{all_views.views}}</h1>
 								<small>Visitors</small>
-
 							</div>
+
+								{%endif%}
+
 							<div class="singleRecpost">
 								<h1 style="color: orange;">3</h1>
 								<small>Partners</small>

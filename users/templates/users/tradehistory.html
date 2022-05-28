@@ -1,0 +1,128 @@
+{%extends 'users/userbase.html'%}
+{%load static%}
+{%block content%}
+        <section>
+        
+          <div class="wrapper rounded">
+              <nav class="navbar navbar-expand-lg navbar-dark dark d-lg-flex align-items-lg-start"> <a class="navbar-brand"
+                      href="#">My Tradings <p class="text-muted pl-1">Welcome to your Trade History</p> </a> <button
+                      class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+                          class="navbar-toggler-icon"></span> </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                      <ul class="navbar-nav ml-lg-auto">
+                          <li class="nav-item"> <a class="nav-link" href="#"><span
+                                      class="fa fa-bell-o font-weight-bold"></span> <span class="notify">Notifications</span>
+                              </a> </li>
+                          <li class="nav-item "> <a href="#"><span class="fa fa-search"></span></a> <input type="search"
+                                  class="dark" placeholder="Search"> </li>
+                      </ul>
+                  </div>
+              </nav>
+              <div class="row mt-2 pt-2">
+                  <div class="col-md-6" id="income">
+                      <div class="d-flex justify-content-start align-items-center">
+                          <p class="fa fa-long-arrow-down"></p>
+                          <p class="text mx-3">Total Trade Profit</p>
+                          <p class="text-white ml-4 money">${{trades_sum.sum}}</p>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="d-flex justify-content-md-end align-items-center">
+                          <div class="fa fa-long-arrow-up"></div>
+                          <!-- <div class="text mx-3">Total profit</div>
+                          <div class="text-white ml-4 money">${{trades_sum.sum}}</div> -->
+                      </div>
+                  </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                  <ul class="nav nav-tabs w-75">
+                      <li class="nav-item"> <a class="nav-link active" href="">Trades</a> </li>
+                  </ul> <a class="btn btn-primary" href="{%url 'alltrades'%}">New Trade</a>
+              </div>
+              
+              <div class="table-responsive mt-2">
+                  <table class="table table-dark table-borderless">
+                      <thead>
+                          <tr>
+                              <th scope="col">Activity</th>
+                              <th scope="col">Date Trade</th>
+                              <th scope="col">Date Due</th>
+                              <th scope="col" class="text-right">Amount</th>
+                              <th scope="col" class="text-right">Profit</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {%for trade in trades%}
+                          <tr>
+                              <td scope="row"> <span class="fa fa fa-exchange mr-1"></span> Trade </td>
+                              <td class="text-muted">{{trade.time_now}}</td>
+                              <td class="text-muted">{{trade.due_time}}</td>
+                              <td > <span class="fa fa-long-arrow-up mr-1"></span> ${{trade.amount}} </td>
+                              <td class="d-flex justify-content-end align-items-center"> <span class="fa fa-long-arrow-down"></span> ${{trade.profit}} </td>
+                          </tr>
+                        {%endfor%}
+                       
+                      </tbody>
+                  </table>
+              </div>
+             
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <ul class="nav nav-tabs w-75">
+                    <li class="nav-item"> <a class="nav-link active" href="">Pending Trades</a> </li>
+                </ul> <a class="btn btn-primary" href="">All Pending Trades</a>
+            </div>
+            <div class="table-responsive mt-2">
+                <table class="table table-dark table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col">Activity</th>
+                            <th scope="col">Date Trade</th>
+                            <th scope="col">Date Due</th>
+                            <th scope="col" class="text-right">Amount</th>
+                            <th scope="col" class="text-right">Profit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for trade in pending%}
+                        <tr>
+                            <td scope="row"> <span class="fa fa fa-exchange mr-1"></span> Trade </td>
+                            <td class="text-muted">{{trade.time_now}}</td>
+                            <td class="text-muted">{{trade.due_time}}</td>
+                            <td > <span class="fa fa-long-arrow-up mr-1"></span> ${{trade.amount}} </td>
+                            <td class="d-flex justify-content-end align-items-center"> <span class="fa fa-long-arrow-down"></span> ${{trade.profit}} </td>
+                        </tr>
+                        {%endfor%}
+                        
+                    </tbody>
+                </table>
+            </div>
+              <div class="d-flex justify-content-between align-items-center results"> <span class="pl-md-3">Showing<b
+                          class="text-white">all transactions</b> Glencore|trading</span>
+                  <div class="pt-3">
+                      <nav aria-label="Page navigation example">
+                          <ul class="pagination">
+                              <li class="page-item disabled"> <a class="page-link" href="#" aria-label="Previous"> <span
+                                          aria-hidden="true">&lt;</span> </a> </li>
+                              <li class="page-item"> <a class="page-link" href="#" aria-label="Next"> <span
+                                          aria-hidden="true">&gt;</span> </a> </li>
+                          </ul>
+                      </nav>
+                  </div>
+              </div>
+          </div>
+      
+        
+          
+    
+        <footer class="page-footer">
+      
+        </footer>
+    
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        </section>
+        {%endblock content%}

@@ -2,7 +2,7 @@
 {%load static%}
 {%block content%}
             <!-- Container fluid  -->
-            <div class="container-fluid">
+            <div class="container">
                 <!-- Start Page Content -->
                 <div class="row">
                     <div class="col-12">
@@ -10,7 +10,6 @@
                     </div>
                 </div>
                 <!-- Start Page Content -->
-                <div class="container-fluid">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-title">
@@ -22,7 +21,7 @@
                                             <tr>
                                                 <th>User</th>
                                                 <th>Email</th>
-                                                <th>Phone No:</th>
+                                                <th>ID</th>
                                                 <th>Date</th>
                                                 <th>Amount</th>
                                                 <th>Approve</th>
@@ -35,7 +34,7 @@
 
                                                 <td>{{deposit.user}}</td>
                                                 <td class="success">{{deposit.user.email}}</td>
-                                                <td>{{deposit.user.profile.phone}}</td>
+                                                <td>{{deposit.user.profile.uid}}</td>
                                                 <td>{{deposit.date_deposited}}</td>
                                                 <td>$ {{deposit.amount}}</td>
                                                 <td>
@@ -79,7 +78,6 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>              
             <!-- End PAge Content -->

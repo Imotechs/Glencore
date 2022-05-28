@@ -69,6 +69,7 @@ def register(request):
 
                     )
                     profile.save()
+                    messages.success(request, 'Your registration was succesful!')
                     return redirect('pre_profile',user.id)          
             except ValueError:
                 form = UserRegistrationForm(request.POST)
@@ -95,11 +96,28 @@ def pre_profile(request,pk):
         obj.country = request.POST['country'] 
         obj.phone = request.POST['phone']
         obj.save()
+        messages.success(request, 'Welcome!, Now Login')
         return redirect('login')
     return render(request,'users/country.html')
 
 @login_required
 def profile(request):
+    if request.method =='POST':
+        try:
+            uid = request.POST['uid']
+            userid = Profile.objects.get(uid = uid)
+            if userid:
+                acc = Profile.objects.get(user = request.user)
+                acc.referrer = uid 
+                acc.referred = True
+                acc.profited = False
+                acc.save()
+                messages.info(request, 'Referer Added')
+                return redirect('profile')
+        except Exception:
+            messages.info(request, 'No user with that ID')
+            return redirect('profile')
+
     trade = Trading.objects.filter(user = request.user, profited = False)
     time = timezone.now()
     for item in trade:
@@ -157,7 +175,7 @@ def deposit(request):
     wallet = 'xadwqweewtrlwrtretewqrtert'
 
     if request.method =='POST':
-        if float(request.POST['amount']) >50:
+        if float(request.POST['amount']) >49:
             try:
                 obj = Deposit(
                     user = request.user,
@@ -165,6 +183,7 @@ def deposit(request):
                     option = request.POST['method'],
                     date_deposited = timezone.now(),
                     )
+
                 obj.save()
                 messages.success(request,'Make your payment Using the Copied Wallet Address')
                 messages.success(request,f'i do no copy?, Coppy it now! :{wallet}')
@@ -274,8 +293,165 @@ class MakeInvestment(LoginRequiredMixin,CreateView):
         except Exception:
             messages.info(self.request,'It seems you Havent Deposited!')
             return redirect('trade')
+def tradehistory(request):
+    trades = Trading.objects.filter(user = request.user,profited = True)
+    pending = Trading.objects.filter(user = request.user,profited = False)
+    trades_sum = Trading.objects.filter(user = request.user,profited = True).aggregate(sum = Sum('profit'))
+    context = {
+        'trades':trades,
+        'trades_sum':trades_sum,
+        'pending':pending,
+    }
+    return render(request, 'users/tradehistory.html',context)
+
+    
+def all (request):
+    return render(request,'users/alltrades.html')
+
+def tradedetaileth (request):
+    return render(request,'users/detail-trades.html')
+
+def tradedetailbtc (request):
+    return render(request,'users/tradedetailbtc.html')
+def tradedetailcom (request):
+    return render(request,'users/tradedetailcom.html')
+
+def tradedetailforex(request):
+    return render(request,'users/tradedetailforex.html')
 
 
+def trades(request):
+    if request.method == 'POST':
+
+        try:
+            account = Account.objects.get(user =request.user)
+            if account.balance > float(request.POST['amount']):
+                now,due_time = functions.get_date()
+                interest = functions.get_percentage(request.POST['amount'])
+                obj = Trading(
+                user =request.user,
+                amount = float(request.POST['amount']),
+                profit = interest,
+                sum = float(request.POST['amount']) + float(interest),
+                time_now = now,
+                due_time = due_time,
+                    )
+
+                account.balance = account.balance - float(request.POST['amount'])
+                account.save()
+                obj.save()
+                messages.success(request,'Success!!')
+                return  redirect('profile')  
+            else:
+                messages.info(request,'Insufficient Account Balance, Pls Deposit')
+                return redirect('tradesucces')
+        except Exception as err:
+            print('error',err)
+            messages.info(request,'It seems you havent Deposited!')
+            return redirect('profile')
+
+    return render(request,'users/confirm-trade.html')
+
+
+def tradesbtc(request):
+    if request.method == 'POST':
+
+        try:
+            account = Account.objects.get(user =request.user)
+            if account.balance > float(request.POST['amount']):
+                now,due_time = functions.get_date()
+                interest = functions.get_percentage(request.POST['amount'])
+                obj = Trading(
+                user =request.user,
+                amount = float(request.POST['amount']),
+                profit = interest,
+                sum = float(request.POST['amount']) + float(interest),
+                time_now = now,
+                due_time = due_time,
+                    )
+
+                account.balance = account.balance - float(request.POST['amount'])
+                account.save()
+                obj.save()
+                messages.success(request,'Success!!')
+                return  redirect('tradesucces')  
+            else:
+                messages.info(request,'Insufficient Account Balance, Pls Deposit')
+                return redirect('profile')
+        except Exception as err:
+            print('error',err)
+            messages.info(request,'It seems you havent Deposited!')
+            return redirect('profile')
+
+    return render(request,'users/confirmbtc.html')
+
+
+def tradescom(request):
+    if request.method == 'POST':
+
+        try:
+            account = Account.objects.get(user =request.user)
+            if account.balance > float(request.POST['amount']):
+                now,due_time = functions.get_date()
+                interest = functions.get_percentage(request.POST['amount'])
+                obj = Trading(
+                user =request.user,
+                amount = float(request.POST['amount']),
+                profit = interest,
+                sum = float(request.POST['amount']) + float(interest),
+                time_now = now,
+                due_time = due_time,
+                    )
+
+                account.balance = account.balance - float(request.POST['amount'])
+                account.save()
+                obj.save()
+                messages.success(request,'Success!!')
+                return  redirect('profile')  
+            else:
+                messages.info(request,'Insufficient Account Balance, Pls Deposit')
+                return redirect('tradesucces')
+        except Exception as err:
+            print('error',err)
+            messages.info(request,'It seems you havent Deposited!')
+            return redirect('profile')
+
+    return render(request,'users/confirmcom.html')
+
+
+def tradesforex(request):
+    if request.method == 'POST':
+
+        try:
+            account = Account.objects.get(user =request.user)
+            if account.balance > float(request.POST['amount']):
+                now,due_time = functions.get_date()
+                interest = functions.get_percentage(request.POST['amount'])
+                obj = Trading(
+                user =request.user,
+                amount = float(request.POST['amount']),
+                profit = interest,
+                sum = float(request.POST['amount']) + float(interest),
+                time_now = now,
+                due_time = due_time,
+                    )
+
+                account.balance = account.balance - float(request.POST['amount'])
+                account.save()
+                obj.save()
+                messages.success(request,'Success!!')
+                return  redirect('tradesucces')  
+            else:
+                messages.info(request,'Insufficient Account Balance, Pls Deposit')
+                return redirect('profile')
+        except Exception as err:
+            print('error',err)
+            messages.info(request,'It seems you havent Deposited!')
+            return redirect('profile')
+
+    return render(request,'users/confirmforex.html')
+def tradesucces(request):
+    return render(request, 'users/trade-success.html')
 
 class MakePinDepositView(LoginRequiredMixin,CreateView):
     model = PinDeposit
@@ -289,41 +465,43 @@ class MakePinDepositView(LoginRequiredMixin,CreateView):
         form.instance.pin = pin
         return super().form_valid(form)
 
-class WithDraw(LoginRequiredMixin,UserPassesTestMixin,CreateView):
+class WithDraw(LoginRequiredMixin,CreateView):
     template_name = 'users/withdraw.html'
     model = Withdrowal
     fields = ['amount']
     success_url = '/accounts/profile/'
-    def test_func(self):
-        pendings = Withdrowal.objects.filter(user  = self.request.user, approved = False)
-        if pendings:
-            messages.info(self.request, 'We are working on your Last Pending transaction')
-            return False
-        else:
-            return True
+   
     def form_valid(self, form):
-        
-        try:
-            account = Account.objects.get(user = self.request.user)
+        pendings = Withdrowal.objects.filter(user  = self.request.user, approved = False, cancel = False)
+        if not pendings:
+            try:
+                account = Account.objects.get(user = self.request.user)
 
-            if float(self.request.POST['amount']) < account.balance:
-                if float(self.request.POST['amount'])>50:
-                    account.balance = account.balance - float(self.request.POST['amount'])
-                    form.instance.user = self.request.user
-                    form.instance.wallet_address = self.request.POST['wallet']
-                    form.instance.amount = float(self.request.POST['amount'])
-                    form.instance.date_placed = timezone.now()
-                    account.save()
-                    messages.success(self.request,'Your Withdrawal was placed Succesfully!')
-                    return super().form_valid(form) 
+                if float(self.request.POST['amount']) < float(account.balance):
+                    if float(self.request.POST['amount'])>49.9:
+                        if float(self.request.POST['amount'])<1001:
+                            account.balance = account.balance - float(self.request.POST['amount'])
+                            form.instance.user = self.request.user
+                            form.instance.wallet_address = self.request.POST['wallet']
+                            form.instance.amount = float(self.request.POST['amount'])
+                            form.instance.date_placed = timezone.now()
+                            account.save()
+                            messages.success(self.request,'Your Withdrawal was placed Succesfully!')
+                            return super().form_valid(form) 
+                        else:
+                            messages.info(self.request,'Withdrawal amount must be below or equal to 1000 USD')
+                            return redirect('withdrow')
+                    else:
+                        messages.info(self.request,'Withdrawal amount must be above 50USD')
+                        return redirect('withdrow')
                 else:
-                    messages.info(self.request,'Withdrawal amount must be above 50USD')
+                    messages.info(self.request,'Insufficient Balance, Pls Trade More')
                     return redirect('withdrow')
-            else:
-                messages.info(self.request,'Insufficient Balance, Pls Trade More')
-                return redirect('withdrow')
-        except Exception:
-                messages.info(self.request,'Insufficient Balance, Pls Trade More')
-                return redirect('withdrow')          
+            except Exception:
+                    messages.info(self.request,'Insufficient Balance, Pls Trade More')
+                    return redirect('withdrow')          
 
-    
+        else:
+            messages.info(self.request, 'Sorry!!,We are working on your Last Pending transaction')
+            return redirect('withdrow')          
+

@@ -1,0 +1,54 @@
+{%extends 'users/userbase.html'%}
+{%load static%}
+{%load crispy_forms_tags%}
+{%block content%}
+
+        <h3 style="text-align: center;">Confirm Your Trade</h3><br>
+      <p style="text-align: center;">Review your Trade and confirm to start Trading </p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-sm-9">
+          <div class="card ">
+            <div class="card-body">
+              <h5 class="card-title">Commodity Super Trading Terminal</h5>
+              <div class=" d-flex justify-content-between">
+                <div class="mb-2 text-muted">Trade Duration: 21 days</div>
+                <div><p class="mb-2 text-muted">Daily Profit: 0.8%</p> </div>
+              </div>
+            </div>
+          </div><br>
+          <div class="card ">
+            <div class="card-body">
+                <div class=" d-flex justify-content-between">
+                    <div class="mb-2 text-muted">Total Charges</div>
+                    <div><p>100.00 USD</p> </div>
+                </div>
+                <div class=" d-flex justify-content-between">
+                    <div class="mb-2 text-muted">Investment Amount</div>
+                    <div><p>100 USD</p> </div>
+                </div>
+            </div>
+          </div><br>
+          <div class="card ">
+            <div class="card-body">
+                <div class=" d-flex justify-content-between">
+                    <div class="mb-2 text-muted">Total Profit Returned:</div>
+                    <div><p>16.8USD</p> </div>
+                </div>
+            </div>
+            <form method="post">
+          </div><br>
+          <div class="card">
+            <input hidden name="amount" value="100">
+            {%csrf_token%}
+            <button class="btn btn-primary">Confirm & Proceed</button>
+          </div><br>
+          <div class="card">
+            <a href="{%url 'profile'%}" class="btn btn-warning" style="color: dark">Cancel Trade</a>
+          </div>
+          </form>
+        </div>
+      </div>
+    {%endblock content%}
+
+   

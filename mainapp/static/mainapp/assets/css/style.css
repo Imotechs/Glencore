@@ -970,7 +970,7 @@ fieldset {
 	position: absolute;
 	top: auto;
 	right: 5px;
-	font-size: 14px;
+	font-size: 15px;
 }
 
 .dropdown-menu li>a {
@@ -1028,7 +1028,6 @@ fieldset {
 }
 
 .dropdown-menu .dropdown>.dropdown-menu {
-	left: 300%;
 	margin-top: -1px;
 	min-width: 170px;
 	opacity: 0;
@@ -1042,7 +1041,7 @@ fieldset {
 .dropdown-menu .dropdown:hover>.dropdown-menu {
 	visibility: visible;
 	opacity: 1;
-	left: 100.5%;
+	left: 0%;
 }
 
 .mainmenu-area .navbar-form {

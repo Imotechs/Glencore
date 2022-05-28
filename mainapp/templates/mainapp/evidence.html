@@ -1,0 +1,34 @@
+{%extends 'mainapp/base.html'%}
+{%load static%}
+{%load crispy_forms_tags%}
+{%block content%}
+	<div class="d-flex align-items-center justify-content-center" style="padding: 30px;">
+        <div class="px-9 col-md-6" >
+            <h2 style="text-align: center; color: white;">Upload Payment Evidence</h2>
+            <p class="text-50" style="text-align: center; color: #f7921a">Upload your payment Evidence</p>
+            <form class="mt-5 mb-4" action="#" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                  {{form|crispy}}  
+                </div>
+                {%csrf_token%}
+                
+                
+                <button class="btn" style="background-color:#f7921a; color:white;" type="submit">Upload</button>
+                <!-- <div class="py-2">
+                    <button class="btn  btn-facebook btn-block"><i class="feather-facebook"></i> Connect with Facebook</button>
+                </div> -->
+            </form>
+            <style>
+                button{
+                    margin: 35px;
+                }
+                img{
+                    margin: 35px;
+
+                }
+            </style>
+        </div>
+    </div>
+	
+	
+	{%endblock content%}
