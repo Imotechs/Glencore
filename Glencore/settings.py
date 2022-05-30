@@ -9,7 +9,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ycl$(3zgb)e0&8klrucvs0kc_qwn4&%4g34%@3-a5re!_(ab=v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -72,17 +71,7 @@ DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'glencore',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD':'',
-        'PORT': '3306',
-        # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'glencore$Glencore121',
-        # 'USER': 'glencore',
-        # 'PASSWORD': 'thelordisgood121',
-        # 'HOST': 'glencore.mysql.pythonanywhere-services.com',
+     
     }
 }
 
@@ -140,5 +129,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'#'django.core.mail.
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'adzembehj@gmail.com'
-EMAIL_HOST_PASSWORD = 'jevjyyfqklsvcmoi'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
